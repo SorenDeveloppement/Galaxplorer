@@ -4,7 +4,6 @@ import fr.galaglow.scenes.components.FlatFileCard;
 import fr.galaglow.scenes.components.TopBar;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -36,7 +35,10 @@ public class MainScene {
     }
 
     private static void addElements() {
-        new FlatFileCard(pane, 10, 10, new File(System.getProperty("user.home") + "/Desktop"));
+        new FlatFileCard(pane,25, 60, new File(System.getProperty("user.home") + "/Desktop"));
+        new FlatFileCard(pane,25, 85, new File(System.getProperty("user.home") + "/Documents"));
+        new FlatFileCard(pane,25, 110, new File(System.getProperty("user.home") + "/Downloads"));
+        new FlatFileCard(pane,25, 135, new File(System.getProperty("user.home") + "/Musics"));
         new TopBar(pane, STAGE);
     }
 
