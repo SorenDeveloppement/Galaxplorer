@@ -2,11 +2,9 @@ package fr.galaglow.scenes.components;
 
 import fr.galaglow.Main;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -39,15 +37,29 @@ public class FlatFileCard {
         box.setTranslateX(x);
         box.setTranslateY(y);
         box.setAlignment(Pos.BASELINE_LEFT);
+        box.setStyle("-fx-border-color: transparent transparent linear-gradient(to right, transparent, transparent, white, white, white, transparent, transparent) transparent;");
 
-        box.setOnMouseClicked(event -> System.out.println("Clicked !"));
+        box.setOnMouseClicked(event -> {
+            System.out.println("Clicked on " + file);
+            if (file.isDirectory()) {
+                System.out.println("Dir");
+                for (File f : Objects.requireNonNull(file.listFiles())) {
+                    System.out.println("Name : " + f.getName() + "\nPath : " + f.getAbsolutePath() + "\nSize : " + f.length() + "o");
+                    System.out.println("----------------------------------------");
+                }
+            } else {
+                System.out.println("File");
+            }
+        });
 
         Text fileName = new Text(file.getName());
         fileName.setStyle("-fx-font-size: 15px;  -fx-font-family: regular;");
         fileName.setFill(Color.WHITE);
         fileName.setTranslateX(15);
+        fileName.setTranslateY(-5);
 
         ImageView icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/logo.png")).toExternalForm(), 18, 18, false, false));
+        icon.setTranslateY(-2);
 
         box.getChildren().addAll(icon, fileName);
         pane.getChildren().addAll(card, box);

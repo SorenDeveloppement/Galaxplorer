@@ -1,9 +1,11 @@
 package fr.galaglow.scenes;
 
 import fr.galaglow.scenes.components.FlatFileCard;
+import fr.galaglow.scenes.components.Separator;
 import fr.galaglow.scenes.components.TopBar;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 
@@ -38,7 +40,8 @@ public class MainScene {
         new FlatFileCard(pane,25, 60, new File(System.getProperty("user.home") + "/Desktop"));
         new FlatFileCard(pane,25, 85, new File(System.getProperty("user.home") + "/Documents"));
         new FlatFileCard(pane,25, 110, new File(System.getProperty("user.home") + "/Downloads"));
-        new FlatFileCard(pane,25, 135, new File(System.getProperty("user.home") + "/Musics"));
+        new FlatFileCard(pane,25, 135, new File(System.getProperty("user.home") + "/Music"));
+        new Separator(pane, 200, 0);
         new TopBar(pane, STAGE);
     }
 
