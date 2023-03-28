@@ -2,6 +2,7 @@ package fr.galaglow.scenes.components;
 
 import fr.galaglow.Main;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,23 +12,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
-public class FlatFileCard extends Node {
+import static fr.galaglow.helper.Constants.FILE_LIST;
+
+public class FlatFileCard extends Group {
 
     public FlatFileCard(Pane pane, double x, double y, File file) {
 
         if(y < 40d) y = 40d;
         if(x < 0d) x = 0d;
-
-        Rectangle card = new Rectangle();
-
-        card.setTranslateX(x);
-        card.setTranslateY(y);
-        card.setWidth(150);
-        card.setHeight(20);
-        card.setFill(Color.valueOf("#272727"));
-        card.getStyleClass().add("flatFileCard");
 
         HBox box = new HBox();
 
@@ -48,7 +47,10 @@ public class FlatFileCard extends Node {
                     System.out.println("Name : " + f.getName() + "\nPath : " + f.getAbsolutePath() + "\nSize : " + f.length() + "o");
                     System.out.println("----------------------------------------");
                 } */
-                new ListFile(pane, Objects.requireNonNull(file.listFiles()));
+
+                FILE_LIST.clear();
+                FILE_LIST.setFiles(file.listFiles());
+                FILE_LIST.show();
             } else {
                 System.out.println("File");
             }
@@ -60,11 +62,21 @@ public class FlatFileCard extends Node {
         fileName.setTranslateX(15);
         fileName.setTranslateY(-5);
 
-        ImageView icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/logo.png")).toExternalForm(), 18, 18, false, false));
+        String[] codeFileType = new String[] {".java", ".class", ".py", ".c", ".cpp", ".cs", ".js"};
+
+        ImageView icon;
+        try {
+            // TODO comprendre pourquoi il ne veut pas mettre la bonne icone pour les fichiers de code
+            if (Arrays.asList(codeFileType).contains(Files.probeContentType(file.toPath()))) icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/code.png")).toExternalForm(), 18, 18, false, false));
+            else if (file.isFile()) icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/file.png")).toExternalForm(), 18, 18, false, false));
+            else icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/logo.png")).toExternalForm(), 18, 18, false, false));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         icon.setTranslateY(-2);
 
         box.getChildren().addAll(icon, fileName);
-        pane.getChildren().addAll(card, box);
+        pane.getChildren().addAll(box);
     }
 
     @Override

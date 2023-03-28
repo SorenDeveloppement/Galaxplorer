@@ -1,7 +1,6 @@
 package fr.galaglow.scenes.components;
 
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -9,9 +8,20 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ListFile {
-    public ListFile(Pane pane, File[] files) {
-        ArrayList<FlatFileCard> fls = new ArrayList<>();
+    private final Pane pane;
+    private File[] files = null;
+    private final ArrayList<FlatFileCard> fls = new ArrayList<>();
 
+
+    private VBox root = new VBox();
+    private ScrollPane sp = new ScrollPane();
+    private VBox scrollbox = new VBox();
+
+    public ListFile(Pane pane) {
+        this.pane = pane;
+    }
+
+    public void show() {
         int space = 30;
         int i = 0;
         for (File file : files) {
@@ -19,11 +29,21 @@ public class ListFile {
             i += space;
         }
 
-        VBox root = new VBox();
-        ScrollPane sp = new ScrollPane();
-        HBox scrollbox = new HBox();
         scrollbox.getChildren().addAll(fls);
-        sp.setContent(scrollbox);
         root.getChildren().add(sp);
+        sp.setContent(root);
     }
+
+    public void clear() {
+        fls.clear();
+        root.getChildren().clear();
+        root.getChildren().removeAll(root.getChildren());
+        scrollbox.getChildren().clear();
+        scrollbox.getChildren().removeAll(scrollbox.getChildren());
+    }
+
+    public void setFiles(File[] files) {
+        this.files = files;
+    }
+    
 }

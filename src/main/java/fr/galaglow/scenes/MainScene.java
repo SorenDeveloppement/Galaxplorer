@@ -45,4 +45,8 @@ public class MainScene {
         new TopBar(pane, STAGE);
     }
 
+    public static Pane getPane() {
+        return pane;
+    }
+
 }
