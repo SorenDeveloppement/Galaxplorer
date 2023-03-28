@@ -2,6 +2,7 @@ package fr.galaglow.scenes.components;
 
 import fr.galaglow.Main;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -12,7 +13,7 @@ import javafx.scene.text.Text;
 import java.io.File;
 import java.util.Objects;
 
-public class FlatFileCard {
+public class FlatFileCard extends Node {
 
     public FlatFileCard(Pane pane, double x, double y, File file) {
 
@@ -42,11 +43,12 @@ public class FlatFileCard {
         box.setOnMouseClicked(event -> {
             System.out.println("Clicked on " + file);
             if (file.isDirectory()) {
-                System.out.println("Dir");
+                /* System.out.println("Dir");
                 for (File f : Objects.requireNonNull(file.listFiles())) {
                     System.out.println("Name : " + f.getName() + "\nPath : " + f.getAbsolutePath() + "\nSize : " + f.length() + "o");
                     System.out.println("----------------------------------------");
-                }
+                } */
+                new ListFile(pane, Objects.requireNonNull(file.listFiles()));
             } else {
                 System.out.println("File");
             }
@@ -63,5 +65,10 @@ public class FlatFileCard {
 
         box.getChildren().addAll(icon, fileName);
         pane.getChildren().addAll(card, box);
+    }
+
+    @Override
+    public Node getStyleableNode() {
+        return super.getStyleableNode();
     }
 }
