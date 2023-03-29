@@ -30,14 +30,13 @@ public class FlatFileCard extends Group {
 
         HBox box = new HBox();
 
-        box.setMinWidth(150);
+        box.setMinWidth(200);
         box.setMinHeight(20);
-        box.setMaxWidth(150);
         box.setMaxHeight(20);
         box.setTranslateX(x);
         box.setTranslateY(y);
         box.setAlignment(Pos.BASELINE_LEFT);
-        box.setStyle("-fx-border-color: transparent transparent linear-gradient(to right, transparent, transparent, white, white, white, transparent, transparent) transparent;");
+        box.setStyle("-fx-border-color: transparent transparent linear-gradient(to right, transparent, transparent, white, white, white, transparent, transparent) transparent; -fx-background-color: #272727;");
 
         box.setOnMouseClicked(event -> {
             System.out.println("Clicked on " + file);
@@ -56,7 +55,11 @@ public class FlatFileCard extends Group {
             }
         });
 
-        Text fileName = new Text(file.getName());
+        String fName;
+        if (file.getName().length() >= 18) {
+            fName = file.getName().substring(0, 18) + "…";
+        } else fName = file.getName();
+        Text fileName = new Text(fName);
         fileName.setStyle("-fx-font-size: 15px;  -fx-font-family: regular;");
         fileName.setFill(Color.WHITE);
         fileName.setTranslateX(15);

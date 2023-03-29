@@ -37,10 +37,10 @@ public class MainScene {
     }
 
     private static void addElements() {
-        new FlatFileCard(pane,25, 60, new File(System.getProperty("user.home") + "/Desktop"));
-        new FlatFileCard(pane,25, 85, new File(System.getProperty("user.home") + "/Documents"));
-        new FlatFileCard(pane,25, 110, new File(System.getProperty("user.home") + "/Downloads"));
-        new FlatFileCard(pane,25, 135, new File(System.getProperty("user.home") + "/Music"));
+        new FlatFileCard(pane,5, 60, new File(System.getProperty("user.home") + "/Desktop"));
+        new FlatFileCard(pane,5, 85, new File(System.getProperty("user.home") + "/Documents"));
+        new FlatFileCard(pane,5, 110, new File(System.getProperty("user.home") + "/Downloads"));
+        new FlatFileCard(pane,5, 135, new File(System.getProperty("user.home") + "/Music"));
         new Separator(pane, 200, 0);
         new TopBar(pane, STAGE);
     }

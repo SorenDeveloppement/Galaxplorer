@@ -3,6 +3,7 @@ package fr.galaglow.scenes.components;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class ListFile {
         }
 
         scrollbox.getChildren().addAll(fls);
-        root.getChildren().add(sp);
+        root.getChildren().addAll(sp);
         sp.setContent(root);
     }
 
