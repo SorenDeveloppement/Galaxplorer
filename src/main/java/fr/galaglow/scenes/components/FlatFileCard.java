@@ -4,13 +4,16 @@ import fr.galaglow.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -39,19 +42,23 @@ public class FlatFileCard extends Group {
         box.setStyle("-fx-border-color: transparent transparent linear-gradient(to right, transparent, transparent, white, white, white, transparent, transparent) transparent; -fx-background-color: #272727;");
 
         box.setOnMouseClicked(event -> {
-            System.out.println("Clicked on " + file);
-            if (file.isDirectory()) {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                System.out.println("Clicked on " + file);
+                if (file.isDirectory()) {
                 /* System.out.println("Dir");
                 for (File f : Objects.requireNonNull(file.listFiles())) {
                     System.out.println("Name : " + f.getName() + "\nPath : " + f.getAbsolutePath() + "\nSize : " + f.length() + "o");
                     System.out.println("----------------------------------------");
                 } */
 
-                FILE_LIST.clear();
-                FILE_LIST.setFiles(file.listFiles());
-                FILE_LIST.show();
-            } else {
-                System.out.println("File");
+                    FILE_LIST.clear();
+                    FILE_LIST.setFiles(file.listFiles());
+                    FILE_LIST.show();
+                } else {
+                    System.out.println("File");
+                }
+            } else if (event.getButton().equals(MouseButton.SECONDARY)) {
+                System.out.println("Right click !");
             }
         });
 

@@ -9,11 +9,11 @@ import java.util.Objects;
 
 @SuppressWarnings("ALL")
 public class FileOrganizer implements BuiltInApp {
-    private File file = new File("C:\\Users\\soren\\Documents\\Test");
+    private File file = null; // new File("C:\\Users\\soren\\Documents\\Test");
 
     @Override
-    public void init(File file) {
-        this.file = file;
+    public void init(String... args) {
+        this.file = new File(args[0]);
     }
 
     @Override
