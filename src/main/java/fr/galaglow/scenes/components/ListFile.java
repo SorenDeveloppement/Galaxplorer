@@ -3,7 +3,6 @@ package fr.galaglow.scenes.components;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,9 +13,9 @@ public class ListFile {
     private final ArrayList<FlatFileCard> fls = new ArrayList<>();
 
 
-    private VBox root = new VBox();
-    private ScrollPane sp = new ScrollPane();
-    private VBox scrollbox = new VBox();
+    private final VBox root = new VBox();
+    private final ScrollPane sp = new ScrollPane();
+    private final VBox scrollbox = new VBox();
 
     public ListFile(Pane pane) {
         this.pane = pane;
@@ -25,22 +24,26 @@ public class ListFile {
     public void show() {
         int space = 30;
         int i = 0;
-        for (File file : files) {
-            fls.add(new FlatFileCard(pane, 250, 40 + i, file));
-            i += space;
+        try {
+            for (File file : files) {
+                fls.add(new FlatFileCard(pane, 250, 40 + i, file));
+                i += space;
+            }
+        } catch (Exception e) {
+            System.out.println("There is no files in the path ! \r" + e);
         }
 
         scrollbox.getChildren().addAll(fls);
         root.getChildren().addAll(sp);
-        sp.setContent(root);
+        scrollbox.getChildren().add(root);
     }
 
     public void clear() {
+        files = null;
         fls.clear();
-        root.getChildren().clear();
-        root.getChildren().removeAll(root.getChildren());
+        pane.getChildren().remove(6, pane.getChildren().size());
         scrollbox.getChildren().clear();
-        scrollbox.getChildren().removeAll(scrollbox.getChildren());
+        root.getChildren().clear();
     }
 
     public void setFiles(File[] files) {
