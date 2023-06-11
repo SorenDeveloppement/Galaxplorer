@@ -5,7 +5,7 @@ import fr.galaglow.helper.BuiltInApp;
 import java.io.File;
 
 public class FileRenamer implements BuiltInApp {
-    private File file = new File("C:\\Users\\soren\\Documents\\Test");
+    private File file;
     private String newName = "";
 
     @Override
