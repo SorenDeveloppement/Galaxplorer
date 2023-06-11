@@ -12,8 +12,8 @@ public class FileOrganizer implements BuiltInApp {
     private File file = null; // new File("C:\\Users\\soren\\Documents\\Test");
 
     @Override
-    public void init(String... args) {
-        this.file = new File(args[0]);
+    public void init(Object... args) {
+        this.file = new File((String) args[0]);
     }
 
     @Override

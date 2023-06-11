@@ -56,6 +56,7 @@ public class FlatFileCard extends Group {
                     FILE_LIST.show();
                 } else {
                     System.out.println("File");
+                    new RightClickActions(pane, event.getX(), event.getY());
                 }
             } else if (event.getButton().equals(MouseButton.SECONDARY)) {
                 System.out.println("Right click !");

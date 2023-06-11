@@ -4,7 +4,7 @@ import java.io.File;
 
 public interface BuiltInApp {
 
-    public void init(String... args);
+    public void init(Object... args);
     public void execute();
 
 }

@@ -1,6 +1,7 @@
 package fr.galaglow.scenes.components;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -14,8 +15,9 @@ public class ListFile {
 
 
     private final VBox root = new VBox();
-    private final ScrollPane sp = new ScrollPane();
-    private final VBox scrollbox = new VBox();
+    private final ScrollPane sp = new ScrollPane(root);
+
+    private final BorderPane box = new BorderPane(sp);
 
     public ListFile(Pane pane) {
         this.pane = pane;
@@ -33,17 +35,19 @@ public class ListFile {
             System.out.println("There is no files in the path ! \r" + e);
         }
 
-        scrollbox.getChildren().addAll(fls);
-        root.getChildren().addAll(sp);
-        scrollbox.getChildren().add(root);
+        box.getChildren().addAll(fls);
+        sp.setContent(root);
+        sp.setFitToHeight(true);
+        box.getChildren().addAll(sp);
+
     }
 
     public void clear() {
         files = null;
         fls.clear();
         pane.getChildren().remove(6, pane.getChildren().size());
-        scrollbox.getChildren().clear();
         root.getChildren().clear();
+        box.getChildren().clear();
     }
 
     public void setFiles(File[] files) {

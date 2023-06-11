@@ -9,13 +9,13 @@ public class FileRenamer implements BuiltInApp {
     private String newName = "";
 
     @Override
-    public void init(String... args) {
-        this.file = new File(args[0]);
-        this.newName = args[1];
+    public void init(Object... args) {
+        this.file = new File((String) args[0]);
+        this.newName = (String) args[1];
     }
 
     @Override
     public void execute() {
-        this.file.renameTo(new File(this.file + "\\" + newName));
+        this.file.renameTo(new File(this.file.getParent() + "\\" + newName));
     }
 }
