@@ -1,5 +1,6 @@
 package fr.galaglow.scenes.components;
 
+import fr.galaglow.builtin.FileOrganizer;
 import fr.galaglow.builtin.FileRenamer;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -35,12 +36,16 @@ public class RightClickActions extends Group {
         renameFileText.setFont(Font.font("Poppins", FontWeight.NORMAL, 16));
 
         renameFileText.setOnMouseClicked(event -> {
+            box.setOpacity(100);
+            box.setFocusTraversable(false);
             // TODO actualiser les fichiers modifiés
             System.out.println("Clicked !");
             FileRenamer renamer = new FileRenamer();
             // TODO choisir le nv nom du fichier
             renamer.init(file.getAbsoluteFile().toString(), "test" + file.getName().substring(file.getName().lastIndexOf(".")));
             renamer.execute();
+            box.setOpacity(0);
+            box.setFocusTraversable(true);
         });
 
         HBox separator = new HBox();
@@ -49,7 +54,31 @@ public class RightClickActions extends Group {
         separator.setMaxHeight(1);
         separator.setStyle("-fx-border-color: white transparent transparent transparent;");
 
-        box.getChildren().addAll(renameFileText, separator);
+        Text organizeFileText = new Text("Organize files");
+        organizeFileText.setTranslateX(10);
+        organizeFileText.setFill(Color.WHITE);
+        organizeFileText.setFont(Font.font("Poppins", FontWeight.NORMAL, 16));
+
+        organizeFileText.setOnMouseClicked(event -> {
+            box.setOpacity(100);
+            box.setFocusTraversable(false);
+            // TODO actualiser les fichiers modifiés
+            System.out.println("Clicked !");
+            FileOrganizer organizer = new FileOrganizer();
+            // TODO choisir le nv nom du fichier
+            organizer.init(file.getAbsoluteFile().toString());
+            organizer.execute();
+            box.setOpacity(0);
+            box.setFocusTraversable(true);
+        });
+
+        HBox separator_two = new HBox();
+        separator_two.setTranslateY(2);
+        separator_two.setMaxHeight(box.getWidth());
+        separator_two.setMaxHeight(1);
+        separator_two.setStyle("-fx-border-color: white transparent transparent transparent;");
+
+        box.getChildren().addAll(renameFileText, separator, organizeFileText, separator_two);
 
         pane.getChildren().addAll(box);
     }
