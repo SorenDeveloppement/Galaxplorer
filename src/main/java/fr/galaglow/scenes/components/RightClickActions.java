@@ -42,8 +42,18 @@ public class RightClickActions extends Group {
             System.out.println("Clicked !");
             FileRenamer renamer = new FileRenamer();
             // TODO choisir le nv nom du fichier
-            renamer.init(file.getAbsoluteFile().toString(), "test" + file.getName().substring(file.getName().lastIndexOf(".")));
-            renamer.execute();
+            TextInputBox tib = new TextInputBox(pane, "Enter the name");
+            tib.getValidateButton().setOnMouseClicked(e -> {
+                int ext = file.getName().lastIndexOf(".");
+
+                if (ext != -1) {
+                    renamer.init(file.getAbsoluteFile().toString(), tib.getTextArea().getText() + file.getName().substring(ext));
+                } else {
+                    renamer.init(file.getAbsoluteFile().toString(), tib.getTextArea().getText());
+                }
+                renamer.execute();
+                tib.destroy();
+            });
             box.setOpacity(0);
             box.setFocusTraversable(true);
         });
@@ -62,12 +72,15 @@ public class RightClickActions extends Group {
         organizeFileText.setOnMouseClicked(event -> {
             box.setOpacity(100);
             box.setFocusTraversable(false);
+
             // TODO actualiser les fichiers modifiés
             System.out.println("Clicked !");
             FileOrganizer organizer = new FileOrganizer();
+
             // TODO choisir le nv nom du fichier
             organizer.init(file.getAbsoluteFile().toString());
             organizer.execute();
+
             box.setOpacity(0);
             box.setFocusTraversable(true);
         });

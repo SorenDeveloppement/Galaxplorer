@@ -36,16 +36,16 @@ public class ListFile {
         }
 
         box.getChildren().addAll(fls);
+        box.getChildren().addAll(sp);
+        pane.getChildren().addAll(root);
         sp.setContent(root);
         sp.setFitToHeight(true);
-        box.getChildren().addAll(sp);
-
     }
 
     public void clear() {
         files = null;
         fls.clear();
-        pane.getChildren().remove(6, pane.getChildren().size());
+        pane.getChildren().remove(7, pane.getChildren().size());
         root.getChildren().clear();
         box.getChildren().clear();
     }

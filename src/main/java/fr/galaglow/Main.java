@@ -1,5 +1,6 @@
 package fr.galaglow;
 
+import fr.galaglow.helper.Constants;
 import fr.galaglow.scenes.MainScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,6 +16,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
+
+        Constants.ACTUAL_DIR = "C:\\";
 
         stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("/icons/logo.png")).toExternalForm()));
         stage.initStyle(StageStyle.UNDECORATED);

@@ -10,18 +10,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static fr.galaglow.helper.Constants.ACTUAL_DIR;
 import static fr.galaglow.helper.Constants.FILE_LIST;
 
 public class FlatFileCard extends Group {
@@ -54,6 +51,8 @@ public class FlatFileCard extends Group {
                     FILE_LIST.clear();
                     FILE_LIST.setFiles(file.listFiles());
                     FILE_LIST.show();
+
+                    ACTUAL_DIR = file.getAbsolutePath();
                 } else {
                     System.out.println("File");
                 }
