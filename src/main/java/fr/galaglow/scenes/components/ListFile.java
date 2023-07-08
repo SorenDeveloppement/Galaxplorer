@@ -13,9 +13,9 @@ public class ListFile {
     private File[] files = null;
     private final ArrayList<FlatFileCard> fls = new ArrayList<>();
 
+    private final ScrollPane sp = new ScrollPane();
 
     private final VBox root = new VBox();
-    private final ScrollPane sp = new ScrollPane(root);
 
     private final BorderPane box = new BorderPane(sp);
 
@@ -34,6 +34,12 @@ public class ListFile {
         } catch (Exception e) {
             System.out.println("There is no files in the path ! \r" + e);
         }
+
+//        box.getChildren().addAll(fls);
+//        root.getChildren().addAll(box);
+//        sp.setContent(root);
+//        sp.setFitToHeight(true);
+//        pane.getChildren().addAll(sp);
 
         box.getChildren().addAll(fls);
         box.getChildren().addAll(sp);

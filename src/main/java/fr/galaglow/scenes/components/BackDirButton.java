@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static fr.galaglow.helper.Constants.ACTUAL_DIR;
 import static fr.galaglow.helper.Constants.FILE_LIST;
@@ -23,7 +24,7 @@ public class BackDirButton {
         backDirImage.setTranslateY(y);
         backDirImage.setFill(Color.WHITE);
 
-        StringBuilder lastDir = new StringBuilder();
+        AtomicReference<StringBuilder> lastDir = new AtomicReference<>(new StringBuilder());
 
         backDirImage.setOnMouseClicked(event -> {
             ACTUAL_DIR = ACTUAL_DIR.replace("\\", "/");
@@ -35,19 +36,25 @@ public class BackDirButton {
             Collections.addAll(sDir, splitedDir);
             sDir.remove(sDir.toArray().length - 1);
             System.out.println(sDir);
+            System.out.println(sDir.toArray().length);
 
-            for (String s : sDir) {
-                lastDir.append(s).append("\\");
+            if (sDir.toArray().length > 0) {
+                for (String s : sDir) {
+                    lastDir.get().append(s).append("\\");
+                }
+
+                FILE_LIST.clear();
+                System.out.println(lastDir);
+                FILE_LIST.setFiles(new File(lastDir.toString()).listFiles());
+                FILE_LIST.show();
+
+                ACTUAL_DIR = String.valueOf(lastDir);
+                System.out.println(ACTUAL_DIR);
+
+                splitedDir = new String[]{};
+                sDir = new ArrayList<>();
+                lastDir.set(new StringBuilder());
             }
-
-            FILE_LIST.clear();
-            System.out.println(lastDir);
-            FILE_LIST.setFiles(new File(lastDir.toString()).listFiles());
-            FILE_LIST.show();
-
-            ACTUAL_DIR = String.valueOf(lastDir);
-
-            lastDir.delete(0, lastDir.length() - 1);
         });
 
         pane.getChildren().add(backDirImage);

@@ -75,14 +75,10 @@ public class FlatFileCard extends Group {
         String[] codeFileType = new String[] {".java", ".class", ".py", ".c", ".cpp", ".cs", ".js"};
 
         ImageView icon;
-        try {
-            // TODO comprendre pourquoi il ne veut pas mettre la bonne icone pour les fichiers de code
-            if (Arrays.asList(codeFileType).contains(Files.probeContentType(file.toPath()))) icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/code.png")).toExternalForm(), 18, 18, false, false));
-            else if (file.isFile()) icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/file.png")).toExternalForm(), 18, 18, false, false));
-            else icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/logo.png")).toExternalForm(), 18, 18, false, false));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        // TODO comprendre pourquoi il ne veut pas mettre la bonne icone pour les fichiers de code
+        if (Arrays.asList(codeFileType).contains(file.getName())) icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/code.png")).toExternalForm(), 18, 18, false, false));
+        else if (file.isFile()) icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/file.png")).toExternalForm(), 18, 18, false, false));
+        else icon = new ImageView(new Image(Objects.requireNonNull(Main.class.getResource("/icons/logo.png")).toExternalForm(), 18, 18, false, false));
         icon.setTranslateY(-2);
 
         box.getChildren().addAll(icon, fileName);
